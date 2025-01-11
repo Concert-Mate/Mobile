@@ -1,0 +1,42 @@
+package ru.nsu.concertmate
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import ru.nsu.concertmate.ui.screens.FavoriteCitiesScreen
+import ru.nsu.concertmate.ui.screens.LoginScreen
+import ru.nsu.concertmate.ui.screens.MainScreen
+import ru.nsu.concertmate.ui.screens.ProfileScreen
+import ru.nsu.concertmate.ui.theme.ConcertMateTheme
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        enableEdgeToEdge()
+        setContent {
+            FavoriteCitiesScreen()
+        }
+    }
+}
+
+@Composable
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+    Text(
+        text = "Hello $name!",
+        modifier = modifier
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    ConcertMateTheme {
+        Greeting("Android")
+    }
+}
