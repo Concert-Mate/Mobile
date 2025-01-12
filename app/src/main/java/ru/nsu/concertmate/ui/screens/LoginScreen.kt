@@ -66,10 +66,7 @@ fun LoginScreen(email: String, activity: Activity?, isCodeEnter: Boolean) {
     val buttonText = if (isCodeEnter) "Подтвердить" else "Вход"
     val inputFieldText = if (isCodeEnter) "Введите код подтверждения" else "Введите E-mail"
     val inputKeyboardType = if (isCodeEnter) KeyboardType.Number else KeyboardType.Email
-    val systemUiController = rememberSystemUiController()
     val fieldText = remember { mutableStateOf("") }
-    systemUiController.setSystemBarsColor(Color.Green)
-    systemUiController.setNavigationBarColor(Color.Yellow)
 
 
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->

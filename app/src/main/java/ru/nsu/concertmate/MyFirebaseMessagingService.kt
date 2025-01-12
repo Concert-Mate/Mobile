@@ -20,9 +20,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     companion object {
         private const val TAG = "MyFirebaseMessaging"
-        private const val CHANNEL_ID = "FCM_Channel"
-        private const val CHANNEL_NAME = "Default Channel"
-        private const val CHANNEL_DESCRIPTION = "Firebase Cloud Messaging Notifications"
+        const val CHANNEL_ID = "FCM_Channel"
+        const val CHANNEL_NAME = "Default Channel"
+        const val CHANNEL_DESCRIPTION = "Firebase Cloud Messaging Notifications"
     }
 
     override fun onNewToken(token: String) {
@@ -56,7 +56,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         Log.d(TAG, "Handling custom data payload: $data")
     }
 
-    private fun showNotification(title: String?, message: String?) {
+    fun showNotification(title: String?, message: String?) {
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

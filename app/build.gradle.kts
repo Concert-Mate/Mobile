@@ -77,5 +77,10 @@ dependencies {
     implementation(libs.moshi.kotlin.v1110)
     implementation(libs.moshi.adapters)
 
+    // Java language implementation
+    implementation(libs.androidx.fragment)
+    // Kotlin
+    implementation(libs.androidx.fragment.ktx)
+
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
 }
