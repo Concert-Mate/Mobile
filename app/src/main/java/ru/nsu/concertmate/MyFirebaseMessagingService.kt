@@ -29,23 +29,19 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         super.onNewToken(token)
         Log.d(TAG, "New token: $token")
 
-        // Сохраняем токен с помощью Preferences
-        Preferences.setAccessToken(applicationContext, token)
+        Preferences.setFireBaseAccessToken(applicationContext, token)
 
-        // Отправляем токен на сервер
         sendTokenToServer(token)
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
 
-        // Обрабатываем уведомление
         remoteMessage.notification?.let { notification ->
             Log.d(TAG, "Notification received: ${notification.title}, ${notification.body}")
             showNotification(notification.title, notification.body)
         }
 
-        // Обрабатываем пользовательские данные
         if (remoteMessage.data.isNotEmpty()) {
             Log.d(TAG, "Data payload: ${remoteMessage.data}")
             handleDataPayload(remoteMessage.data)
@@ -53,19 +49,16 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     private fun sendTokenToServer(token: String) {
-        // Пример API вызова или обновления на сервере
         Log.d(TAG, "Token sent to server: $token")
     }
 
     private fun handleDataPayload(data: Map<String, String>) {
-        // Обрабатываем пользовательские данные
         Log.d(TAG, "Handling custom data payload: $data")
     }
 
     private fun showNotification(title: String?, message: String?) {
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        // Создаём канал уведомлений для Android 8.0 и выше
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
@@ -77,7 +70,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             notificationManager.createNotificationChannel(channel)
         }
 
-        // Создаём интент для открытия MainActivity
         val intent = Intent(this, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
@@ -86,19 +78,17 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        // Строим уведомление
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle(title ?: "New Notification")
             .setContentText(message ?: "You have a new message.")
-            .setSmallIcon(R.drawable.ic_launcher_foreground) // Замените на иконку вашего приложения
-            .setColor(ContextCompat.getColor(this, R.color.teal_200)) // Необязательный цвет
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setColor(ContextCompat.getColor(this, R.color.teal_200))
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setDefaults(NotificationCompat.DEFAULT_ALL)
             .build()
 
-        // Показываем уведомление
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.POST_NOTIFICATIONS

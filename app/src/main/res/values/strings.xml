@@ -8,4 +8,5 @@
     <string name="title_activity_favorite_track_lists">FavoriteTrackListsActivity</string>
     <string name="title_activity_concert_info">ConcertInfoActivity</string>
     <string name="title_activity_faqactivity">FAQActivity</string>
+    <string name="title_activity_favorite_concerts">FavoriteConcertsActivity</string>
 </resources>

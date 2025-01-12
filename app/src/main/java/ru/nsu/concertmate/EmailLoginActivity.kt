@@ -11,7 +11,7 @@ class EmailLoginActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            LoginScreen(this, isCodeEnter = false)
+            LoginScreen("",this, isCodeEnter = false)
         }
     }
 }

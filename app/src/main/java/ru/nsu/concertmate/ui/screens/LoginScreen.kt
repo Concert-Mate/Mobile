@@ -35,24 +35,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import io.swagger.client.models.DetailResponse
+import io.swagger.client.models.LoginEmailCodeFormModel
 import io.swagger.client.models.LoginEmailFormModel
 import ru.nsu.concertmate.App
 import ru.nsu.concertmate.CodeLoginActivity
 import ru.nsu.concertmate.MainWindowActivity
+import ru.nsu.concertmate.Preferences
 import ru.nsu.concertmate.R
+import ru.nsu.concertmate.ui.ShowErrorDialog
 import ru.nsu.concertmate.ui.components.DefaultTextViewModifier
 import ru.nsu.concertmate.ui.components.TextFieldView
 import ru.nsu.concertmate.ui.theme.FontMontserrat
 import ru.nsu.concertmate.ui.theme.FontRobotoSlab
 
 @Composable
-fun LoginScreen(activity: Activity?, isCodeEnter: Boolean) {
+fun LoginScreen(email: String, activity: Activity?, isCodeEnter: Boolean) {
     val buttonText = if (isCodeEnter) "Подтвердить" else "Вход"
     val inputFieldText = if (isCodeEnter) "Введите код подтверждения" else "Введите E-mail"
     val inputKeyboardType = if (isCodeEnter) KeyboardType.Number else KeyboardType.Email
     val systemUiController = rememberSystemUiController()
-    val codeFieldText = remember { mutableStateOf("") }
+    val fieldText = remember { mutableStateOf("") }
     systemUiController.setSystemBarsColor(Color.Green)
     systemUiController.setNavigationBarColor(Color.Yellow)
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -110,9 +112,9 @@ fun LoginScreen(activity: Activity?, isCodeEnter: Boolean) {
 
             )
             TextFieldView(
-                codeFieldText.value,
+                fieldText.value,
                 placeholder = inputFieldText,
-                onValueChange = { newText -> codeFieldText.value = newText },
+                onValueChange = { newText -> fieldText.value = newText },
                 keyboardType = inputKeyboardType,
                 modifier = DefaultTextViewModifier
                     .align(Alignment.CenterHorizontally)
@@ -123,12 +125,34 @@ fun LoginScreen(activity: Activity?, isCodeEnter: Boolean) {
             Button(
                 onClick = {
                     if (!isCodeEnter) {
-                        //val res = App.api.emailLogin(LoginEmailFormModel(inputFieldText))
-                        val intent = Intent(activity, CodeLoginActivity::class.java)
-                        activity?.startActivity(intent)
+                        try {
+                            //App.api.emailLogin(LoginEmailFormModel(inputFieldText))
+                            val intent = Intent(activity, CodeLoginActivity::class.java)
+                            intent.putExtra("email", fieldText.value)
+                            activity?.startActivity(intent)
+                        } catch (exception: Exception){
+                            if (activity != null) {
+                                ShowErrorDialog(activity, exception)
+                            }
+                            return@Button
+                        }
+
                     } else {
-                        val intent = Intent(activity, MainWindowActivity::class.java)
-                        activity?.startActivity(intent)
+                        val token: String =
+                            App.context?.let { Preferences.getFireBaseAccessToken(it) }!!;
+
+                        try {
+                            //val tokens = App.api.loginWithEmailCode(LoginEmailCodeFormModel(email, inputFieldText, token))
+                            //Preferences.setToken(App.context!!, tokens.accessToken)
+                            //Preferences.setRefreshToken(App.context!!, tokens.refreshToken)
+                            val intent = Intent(activity, MainWindowActivity::class.java)
+                            activity?.startActivity(intent)
+                        } catch (exception: Exception){
+                            if (activity != null) {
+                                ShowErrorDialog(activity, exception)
+                            }
+                            return@Button
+                        }
                     }
                     activity?.finish()
                 },
@@ -157,5 +181,5 @@ fun LoginScreen(activity: Activity?, isCodeEnter: Boolean) {
 @Preview
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen(null, true)
+    LoginScreen("123", null, true)
 }

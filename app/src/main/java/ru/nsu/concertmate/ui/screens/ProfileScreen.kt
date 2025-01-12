@@ -27,6 +27,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ru.nsu.concertmate.FavoriteConcertsActivity
 import ru.nsu.concertmate.MainWindowActivity
 import ru.nsu.concertmate.ui.components.BottomBar
 import ru.nsu.concertmate.ui.components.ProfileColumn
@@ -104,6 +105,10 @@ fun ProfileScreen(activity: Activity?) {
             BottomBar(
                 onMidIconPressed = {
                     val intent = Intent(activity, MainWindowActivity::class.java)
+                    activity?.startActivity(intent)
+                },
+                onRightIconPressed = {
+                    val intent = Intent(activity, FavoriteConcertsActivity::class.java)
                     activity?.startActivity(intent)
                 },
                 modifier = Modifier.fillMaxHeight(1f)

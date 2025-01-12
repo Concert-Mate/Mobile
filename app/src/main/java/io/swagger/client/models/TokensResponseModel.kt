@@ -19,7 +19,7 @@ package io.swagger.client.models
  */
 data class TokensResponseModel (
 
-    val accessToken: kotlin.Any,
-    val refreshToken: kotlin.Any
+    val accessToken: String,
+    val refreshToken: String
 ) {
 }

@@ -19,13 +19,12 @@ class MainActivity : ComponentActivity() {
 
         enableEdgeToEdge()
 
-        // Запрос разрешения на уведомления для Android 13 и выше
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             requestNotificationPermission()
         }
 
         setContent {
-            LoginScreen(activity = this, isCodeEnter = false)
+            LoginScreen("", activity = this, isCodeEnter = false)
         }
     }
 

@@ -9,9 +9,12 @@ import ru.nsu.concertmate.ui.screens.LoginScreen
 class CodeLoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val email = this.intent.getStringExtra("email")
         enableEdgeToEdge()
         setContent {
-            LoginScreen(this, isCodeEnter = true)
+            if (email != null) {
+                LoginScreen(email,this, isCodeEnter = true)
+            }
         }
     }
 }

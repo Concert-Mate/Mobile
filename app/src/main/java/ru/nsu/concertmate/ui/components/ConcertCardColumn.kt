@@ -19,7 +19,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ConcertCardColumn(activity: Activity?, concerts: SnapshotStateList<Int>, modifier: Modifier = Modifier) {
+fun ConcertCardColumn(
+    activity: Activity?,
+    isFavoriteScreen: Boolean,
+    concerts: SnapshotStateList<ConcertInfoDto>,
+    modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .background(
@@ -37,9 +41,10 @@ fun ConcertCardColumn(activity: Activity?, concerts: SnapshotStateList<Int>, mod
             item {
                 Spacer(modifier = Modifier.height(20.dp))
             }
-            items(concerts) { item: Int ->
+            items(concerts) { item: ConcertInfoDto ->
                 ConcertCard(activity,
-                    exampleConcertInfoDto,
+                    item,
+                    isFavoriteScreen,
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.height(20.dp))
@@ -51,5 +56,5 @@ fun ConcertCardColumn(activity: Activity?, concerts: SnapshotStateList<Int>, mod
 @Preview
 @Composable
 private fun ConcertCardColumnPreview() {
-    ConcertCardColumn(null, SnapshotStateList())
+    ConcertCardColumn(null,false,  SnapshotStateList())
 }

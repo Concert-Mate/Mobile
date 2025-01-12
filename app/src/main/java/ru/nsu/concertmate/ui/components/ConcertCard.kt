@@ -43,7 +43,7 @@ data class ConcertInfoDto(
     val isStarred: Boolean,
     val place: String,
     val address: String? = null,
-    val buyLink: String?
+    val buyLink: String?,
 ) :Serializable
 
 val exampleConcertInfoDto = ConcertInfoDto(
@@ -52,7 +52,7 @@ val exampleConcertInfoDto = ConcertInfoDto(
     "16 января, 20:00",
     "Новосибирск",
     1000,
-    true,
+    false,
     "Клуб Подземка",
     buyLink = "https://afisha.yandex.ru/novosibirsk/concert/aleksandr-pushnoi-2025-03?source=rubric"
 )
@@ -62,6 +62,7 @@ val exampleConcertInfoDto = ConcertInfoDto(
 fun ConcertCard(
     activity: Activity?,
     concertInfo: ConcertInfoDto,
+    isFavoriteScreen: Boolean,
     modifier: Modifier = Modifier
 ) {
 
@@ -144,7 +145,16 @@ fun ConcertCard(
             LazyColumn {
                 item(isStarred) {
 
-                    if (isStarred.value)
+                    if (isFavoriteScreen)
+                        Image(
+                            painter = painterResource(id = R.mipmap.trash_icon_foreground),
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .width(36.dp)
+                                .height(36.dp)
+                        )
+                    else if (isStarred.value)
                         Image(
                             painter = painterResource(id = R.mipmap.star_filled_icon_foreground),
                             contentDescription = null,
@@ -173,6 +183,6 @@ fun ConcertCard(
 @Composable
 fun ConcertCardPreview() {
     ConcertCard( null,
-        exampleConcertInfoDto, modifier = Modifier.fillMaxWidth()
+        exampleConcertInfoDto, false, modifier = Modifier.fillMaxWidth()
     )
 }

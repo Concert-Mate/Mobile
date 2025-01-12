@@ -42,7 +42,7 @@ fun FavoriteTrackListsColumn(trackLists: SnapshotStateList<String>, modifier: Mo
             item {
                 TextFieldViewWithIcon(
                     value = city.value,
-                    placeholder = "Введите название треклиста",
+                    placeholder = "Введите ссылку на треклист",
                     onClick = { trackLists.add(city.value) },
                     keyboardType = KeyboardType.Text,
                     onValueChange = { str -> city.value = str },

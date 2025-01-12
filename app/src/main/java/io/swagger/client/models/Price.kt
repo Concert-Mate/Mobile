@@ -19,7 +19,7 @@ package io.swagger.client.models
  */
 data class Price (
 
-    val price: kotlin.Any,
-    val currency: kotlin.Any
+    val price: Int,
+    val currency: String
 ) {
 }
