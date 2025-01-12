@@ -8,7 +8,6 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import ru.nsu.concertmate.ui.screens.LoginScreen
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,7 +30,7 @@ class MainActivity : ComponentActivity() {
         }
 
         setContent {
-            LoginScreen(activity = this, isCodeEnter = false)
+            FavoriteCitiesScreen()
         }
     }
 
