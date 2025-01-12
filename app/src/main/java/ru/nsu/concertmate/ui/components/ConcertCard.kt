@@ -1,7 +1,10 @@
 package ru.nsu.concertmate.ui.components
 
+import android.app.Activity
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,8 +28,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ru.nsu.concertmate.ConcertInfoActivity
 import ru.nsu.concertmate.R
 import ru.nsu.concertmate.ui.theme.FontRubik
+import java.io.Serializable
+
 
 data class ConcertInfoDto(
     val groupName: String,
@@ -38,7 +44,7 @@ data class ConcertInfoDto(
     val place: String,
     val address: String? = null,
     val buyLink: String?
-)
+) :Serializable
 
 val exampleConcertInfoDto = ConcertInfoDto(
     "Король и Шут",
@@ -54,6 +60,7 @@ val exampleConcertInfoDto = ConcertInfoDto(
 
 @Composable
 fun ConcertCard(
+    activity: Activity?,
     concertInfo: ConcertInfoDto,
     modifier: Modifier = Modifier
 ) {
@@ -66,6 +73,11 @@ fun ConcertCard(
                 color = Color(0xFFFFFFFF),
                 shape = RoundedCornerShape(8.dp)
             )
+            .clickable {
+                val intent = Intent(activity, ConcertInfoActivity::class.java)
+                intent.putExtra("dto", concertInfo)
+                activity?.startActivity(intent)
+            }
     ) {
         Box {
             Column(
@@ -160,7 +172,7 @@ fun ConcertCard(
 @Preview
 @Composable
 fun ConcertCardPreview() {
-    ConcertCard(
+    ConcertCard( null,
         exampleConcertInfoDto, modifier = Modifier.fillMaxWidth()
     )
 }

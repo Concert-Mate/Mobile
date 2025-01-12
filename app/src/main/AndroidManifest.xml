@@ -17,8 +17,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ConcertMate"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ConcertInfoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_concert_info"
+            android:theme="@style/Theme.ConcertMate" />
         <activity
             android:name=".FavoriteTrackListsActivity"
             android:exported="false"
@@ -44,14 +49,13 @@
             android:exported="false"
             android:label="login via email and code"
             android:theme="@style/Theme.ConcertMate" />
-
-
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.ConcertMate">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
 
                 <action android:name="android.intent.action.VIEW" />
@@ -62,9 +66,7 @@
                 <data android:scheme="http" />
                 <data android:host="myownpersonaldomain.com" />
             </intent-filter>
-        </activity>
-
-        <!-- Firebase Messaging Service -->
+        </activity> <!-- Firebase Messaging Service -->
         <service
             android:name=".MyFirebaseMessagingService"
             android:exported="false">

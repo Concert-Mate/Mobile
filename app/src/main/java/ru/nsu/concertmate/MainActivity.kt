@@ -10,13 +10,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import ru.nsu.concertmate.ui.screens.LoginScreen
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
-import ru.nsu.concertmate.ui.screens.FavoriteCitiesScreen
-import ru.nsu.concertmate.ui.theme.ConcertMateTheme
 
 class MainActivity : ComponentActivity() {
 
@@ -52,21 +46,5 @@ class MainActivity : ComponentActivity() {
             }
             requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ConcertMateTheme {
-        Greeting("Android")
     }
 }

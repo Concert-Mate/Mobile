@@ -20,11 +20,12 @@ import ru.nsu.concertmate.MainActivity
 import ru.nsu.concertmate.ProfileActivity
 import ru.nsu.concertmate.ui.components.BottomBar
 import ru.nsu.concertmate.ui.components.ConcertInfoColumn
+import ru.nsu.concertmate.ui.components.ConcertInfoDto
 import ru.nsu.concertmate.ui.components.TopBar
 import ru.nsu.concertmate.ui.components.exampleConcertInfoDto
 
 @Composable
-fun ConcertInfoScreen(activity: Activity?) {
+fun ConcertInfoScreen(concertInfoDto: ConcertInfoDto, activity: Activity?) {
 
     Scaffold(
         modifier = Modifier.fillMaxSize()
@@ -51,7 +52,7 @@ fun ConcertInfoScreen(activity: Activity?) {
                 modifier = Modifier.fillMaxHeight(0.065f)
             )
             ConcertInfoColumn(
-                concertInfo = exampleConcertInfoDto,
+                concertInfo = concertInfoDto,
                 modifier = Modifier
                     .fillMaxHeight(0.9f)
                     .fillMaxWidth()
@@ -74,5 +75,5 @@ fun ConcertInfoScreen(activity: Activity?) {
 @Preview
 @Composable
 fun ConcertInfoScreenPreview() {
-    ConcertInfoScreen(null)
+    ConcertInfoScreen(exampleConcertInfoDto, null)
 }

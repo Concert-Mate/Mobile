@@ -1,5 +1,6 @@
 package ru.nsu.concertmate.ui.components
 
+import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,7 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ConcertCardColumn(concerts: SnapshotStateList<Int>, modifier: Modifier = Modifier) {
+fun ConcertCardColumn(activity: Activity?, concerts: SnapshotStateList<Int>, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .background(
@@ -37,7 +38,7 @@ fun ConcertCardColumn(concerts: SnapshotStateList<Int>, modifier: Modifier = Mod
                 Spacer(modifier = Modifier.height(20.dp))
             }
             items(concerts) { item: Int ->
-                ConcertCard(
+                ConcertCard(activity,
                     exampleConcertInfoDto,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -50,5 +51,5 @@ fun ConcertCardColumn(concerts: SnapshotStateList<Int>, modifier: Modifier = Mod
 @Preview
 @Composable
 private fun ConcertCardColumnPreview() {
-    ConcertCardColumn(SnapshotStateList())
+    ConcertCardColumn(null, SnapshotStateList())
 }

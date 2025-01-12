@@ -72,5 +72,10 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.androidx.ui.text.google.fonts)
+    runtimeOnly(libs.moshi.kotlin)
+    runtimeOnly(libs.moshi)
+    implementation(libs.moshi.kotlin.v1110)
+    implementation(libs.moshi.adapters)
+
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
 }

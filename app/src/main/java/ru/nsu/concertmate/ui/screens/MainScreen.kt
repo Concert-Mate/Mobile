@@ -41,10 +41,11 @@ fun MainScreen(activity: Activity?) {
             TopBar(
                 text = "Главное меню", activity,
                 hasRightIcon = true,
-                onRightIconPressed = {/* todo make request*/ },
+                onRightIconPressed = {concerts.add(1)},
                 modifier = Modifier.fillMaxHeight(0.065f)
             )
             ConcertCardColumn(
+                activity,
                 concerts,
                 modifier = Modifier
                     .fillMaxWidth()
