@@ -12,6 +12,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import ru.nsu.concertmate.FAQActivity
 import ru.nsu.concertmate.FavoriteCitiesActivity
 import ru.nsu.concertmate.FavoriteTrackListsActivity
 import ru.nsu.concertmate.MainActivity
@@ -42,7 +43,10 @@ fun ProfileColumn(activity: Activity?, modifier: Modifier = Modifier) {
                 val intent = Intent(activity, FavoriteTrackListsActivity::class.java)
                 activity?.startActivity(intent)
             })
-            ButtonWithText(text = "Часто задаваемые вопросы", onClick = {})
+            ButtonWithText(text = "Часто задаваемые вопросы", onClick = {
+                val intent = Intent(activity, FAQActivity::class.java)
+                activity?.startActivity(intent)
+            })
             ButtonWithText(text = "Выйти из аккаунта", onClick = {
                 val intent = Intent(activity, MainActivity::class.java)
                 activity?.startActivity(intent)
