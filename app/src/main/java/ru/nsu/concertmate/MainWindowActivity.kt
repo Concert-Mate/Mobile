@@ -11,7 +11,7 @@ class MainWindowActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MainScreen(this);
+            MainScreen(this)
         }
     }
 }

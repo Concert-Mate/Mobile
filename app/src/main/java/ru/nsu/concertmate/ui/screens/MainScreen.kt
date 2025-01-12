@@ -21,20 +21,11 @@ import ru.nsu.concertmate.ui.components.ConcertCardColumn
 import ru.nsu.concertmate.ui.components.TopBar
 
 
-enum class MainScreenState {
-    MAIN,
-    PROFILE,
-    //todo
-    //FAVORITE_CONCERTS,
-}
 
 
 @Composable
 fun MainScreen(activity: Activity?) {
     val concerts = remember { mutableStateListOf<Int>() }
-    val state = remember {
-        mutableStateOf(MainScreenState.MAIN)
-    }
 
     Scaffold(
         modifier = Modifier.fillMaxSize()
