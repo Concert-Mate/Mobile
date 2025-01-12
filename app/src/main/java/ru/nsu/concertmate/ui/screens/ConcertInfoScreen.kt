@@ -9,12 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
@@ -22,13 +18,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.nsu.concertmate.ui.components.BottomBar
-import ru.nsu.concertmate.ui.components.ConcertCard
+import ru.nsu.concertmate.ui.components.ConcertInfo
 import ru.nsu.concertmate.ui.components.TopBar
 import ru.nsu.concertmate.ui.components.exampleConcertInfoDto
 
 @Composable
-fun MainScreen() {
-    val concerts = remember { mutableStateListOf<Int>() }
+fun ConcertInfoScreen() {
 
     Scaffold(
         modifier = Modifier.fillMaxSize()
@@ -48,26 +43,20 @@ fun MainScreen() {
                     )
                 )
         ) {
-            TopBar(text = "Главное меню",
-                hasRightIcon = true,
-                onRightIconPressed = {concerts.add(1)},
+            TopBar(text = "О концерте",
+                hasLeftIcon = true,
+                onLeftIconPressed = {},
                 modifier = Modifier.fillMaxHeight(0.065f)
             )
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxHeight(0.9f)
-                    .padding(horizontal = 20.dp)
+            Column(modifier = Modifier
+                .padding(horizontal = 10.dp)
+                .fillMaxHeight(0.9f)
             ) {
-                item {
-                    Spacer(modifier = Modifier.height(20.dp))
-                }
-                items(concerts){ item: Int ->
-                    ConcertCard(
-                        exampleConcertInfoDto,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                }
+                Spacer(modifier = Modifier.height(20.dp))
+                ConcertInfo(
+                    concertInfo = exampleConcertInfoDto,
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
             BottomBar(modifier = Modifier.fillMaxHeight(1f))
         }
@@ -76,6 +65,6 @@ fun MainScreen() {
 
 @Preview
 @Composable
-fun MainScreenPreview(){
-    MainScreen()
+fun ConcertInfoScreenPreview(){
+    ConcertInfoScreen()
 }

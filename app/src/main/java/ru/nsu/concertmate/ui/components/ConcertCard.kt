@@ -28,16 +28,30 @@ import androidx.compose.ui.unit.sp
 import ru.nsu.concertmate.R
 import ru.nsu.concertmate.ui.theme.FontRubik
 
-data class ConcertInfo(val groupName: String,
-                       val title: String,
-                       val time: String,
-                       val city: String,
-                       val price: Int,
-                       val isStarred: Boolean)
+data class ConcertInfoDto(val groupName: String,
+                          val title: String,
+                          val time: String,
+                          val city: String,
+                          val price: Int,
+                          val isStarred: Boolean,
+                          val place: String,
+                          val address: String? = null,
+                          val buyLink:String?
+                          )
+
+val exampleConcertInfoDto = ConcertInfoDto("Король и Шут",
+    "Цифровая сказка",
+    "16 января, 20:00",
+    "Новосибирск",
+    1000,
+    true,
+    "Клуб Подземка",
+    buyLink = "https://afisha.yandex.ru/novosibirsk/concert/aleksandr-pushnoi-2025-03?source=rubric"
+)
 
 
 @Composable
-fun ConcertCard(concertInfo: ConcertInfo,
+fun ConcertCard(concertInfo: ConcertInfoDto,
                 modifier: Modifier = Modifier){
 
     val isStarred = remember { mutableStateOf(concertInfo.isStarred)}
@@ -138,12 +152,6 @@ fun ConcertCard(concertInfo: ConcertInfo,
 @Composable
 fun ConcertCardPreview()
 {
-    ConcertCard( ConcertInfo("Король и Шут",
-        "Цифровая сказка",
-        "16 января, 20:00",
-        "Новосибирск",
-        1000,
-        true
-        )
+    ConcertCard( exampleConcertInfoDto
         ,modifier = Modifier.fillMaxWidth())
 }
