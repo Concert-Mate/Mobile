@@ -26,7 +26,7 @@ import ru.nsu.concertmate.ui.components.exampleConcertInfoDto
 
 @Composable
 fun MainScreen(activity: Activity?) {
-    val concerts = remember { mutableStateListOf<ConcertInfoDto>() }
+    val concerts = remember { mutableStateListOf(exampleConcertInfoDto) }
 
     Scaffold(
         modifier = Modifier.fillMaxSize()

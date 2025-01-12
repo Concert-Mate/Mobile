@@ -24,6 +24,7 @@ fun ConcertCardColumn(
     isFavoriteScreen: Boolean,
     concerts: SnapshotStateList<ConcertInfoDto>,
     modifier: Modifier = Modifier) {
+
     Column(
         modifier = modifier
             .background(
@@ -45,7 +46,10 @@ fun ConcertCardColumn(
                 ConcertCard(activity,
                     item,
                     isFavoriteScreen,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    onRemoveClick = {
+                        concerts.remove(item)
+                    }
                 )
                 Spacer(modifier = Modifier.height(20.dp))
             }

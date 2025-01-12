@@ -63,7 +63,8 @@ fun ConcertCard(
     activity: Activity?,
     concertInfo: ConcertInfoDto,
     isFavoriteScreen: Boolean,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onRemoveClick: () -> Unit
 ) {
 
     val isStarred = remember { mutableStateOf(concertInfo.isStarred) }
@@ -135,7 +136,13 @@ fun ConcertCard(
             )
         }
         IconButton(
-            onClick = { isStarred.value = !isStarred.value },
+            onClick = {
+                if (!isFavoriteScreen) {
+                    isStarred.value = !isStarred.value
+                } else {
+                    onRemoveClick()
+                }
+                      },
             modifier = Modifier
                 .padding(top = 10.dp, end = 5.dp)
                 .width(36.dp)
@@ -182,7 +189,7 @@ fun ConcertCard(
 @Preview
 @Composable
 fun ConcertCardPreview() {
-    ConcertCard( null,
+    /*ConcertCard( null,
         exampleConcertInfoDto, false, modifier = Modifier.fillMaxWidth()
-    )
+    )*/
 }
