@@ -27,8 +27,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.nsu.concertmate.CodeLoginActivity
-import ru.nsu.concertmate.MainActivity
 import ru.nsu.concertmate.MainWindowActivity
 import ru.nsu.concertmate.ui.components.BottomBar
 import ru.nsu.concertmate.ui.components.ProfileColumn
@@ -37,9 +35,11 @@ import ru.nsu.concertmate.ui.theme.FontRubik
 
 
 @Composable
-fun ButtonWithText(text: String,
-                   onClick: () -> Unit,
-                   modifier: Modifier = Modifier){
+fun ButtonWithText(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.outlinedButtonColors(containerColor = Color.Transparent),
@@ -70,13 +70,13 @@ fun ButtonWithText(text: String,
 
 
 @Composable
-fun ProfileScreen(activity: Activity?){
+fun ProfileScreen(activity: Activity?) {
 
     Scaffold(
         modifier = Modifier.fillMaxSize()
     )
     { innerPadding ->
-        Column (
+        Column(
             verticalArrangement = Arrangement.Top,
             modifier = Modifier
                 .padding(innerPadding)
@@ -90,7 +90,8 @@ fun ProfileScreen(activity: Activity?){
                     )
                 )
         ) {
-            TopBar(text = "Профиль",
+            TopBar(
+                text = "Профиль",
                 activity = activity,
                 modifier = Modifier.fillMaxHeight(0.065f)
             )
@@ -105,13 +106,14 @@ fun ProfileScreen(activity: Activity?){
                     val intent = Intent(activity, MainWindowActivity::class.java)
                     activity?.startActivity(intent)
                 },
-                modifier = Modifier.fillMaxHeight(1f))
+                modifier = Modifier.fillMaxHeight(1f)
+            )
         }
     }
 }
 
 @Preview
 @Composable
-fun ProfileScreenPreview(){
+fun ProfileScreenPreview() {
     ProfileScreen(null)
 }

@@ -23,10 +23,11 @@ import ru.nsu.concertmate.R
 import ru.nsu.concertmate.ui.theme.FontRubik
 
 @Composable
-fun TextWithIcon(text: String,
-                 onClick: () -> Unit,
-                 modifier: Modifier = Modifier
-){
+fun TextWithIcon(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
 
 
     Box(
@@ -56,7 +57,7 @@ fun TextWithIcon(text: String,
                 .height(30.dp)
                 .align(Alignment.CenterEnd)
                 .padding(end = 10.dp)
-        ){
+        ) {
             Image(
                 painter = painterResource(id = R.mipmap.trash_icon_foreground),
                 contentDescription = null,

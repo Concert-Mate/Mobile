@@ -12,11 +12,9 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import ru.nsu.concertmate.EmailLoginActivity
 import ru.nsu.concertmate.FavoriteCitiesActivity
 import ru.nsu.concertmate.FavoriteTrackListsActivity
 import ru.nsu.concertmate.MainActivity
-import ru.nsu.concertmate.MainWindowActivity
 import ru.nsu.concertmate.ui.screens.ButtonWithText
 
 @Composable

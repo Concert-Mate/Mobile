@@ -20,7 +20,7 @@ import ru.nsu.concertmate.ui.components.FavoriteTrackListsColumn
 import ru.nsu.concertmate.ui.components.TopBar
 
 @Composable
-fun FavoriteTrackListsScreen(activity: Activity?){
+fun FavoriteTrackListsScreen(activity: Activity?) {
 
     val trackLists = remember { mutableStateListOf<String>() }
 
@@ -28,14 +28,15 @@ fun FavoriteTrackListsScreen(activity: Activity?){
         modifier = Modifier.fillMaxSize()
     )
     { innerPadding ->
-        Column (
+        Column(
             verticalArrangement = Arrangement.Top,
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxWidth()
                 .fillMaxHeight()
         ) {
-            TopBar(text = "Избранные треклисты",
+            TopBar(
+                text = "Избранные треклисты",
                 activity = activity,
                 hasLeftIcon = true,
                 modifier = Modifier.fillMaxHeight(0.065f)
@@ -55,7 +56,8 @@ fun FavoriteTrackListsScreen(activity: Activity?){
                     val intent = Intent(activity, ProfileActivity::class.java)
                     activity?.startActivity(intent)
                 },
-                modifier = Modifier.fillMaxHeight(1f))
+                modifier = Modifier.fillMaxHeight(1f)
+            )
         }
     }
 }
