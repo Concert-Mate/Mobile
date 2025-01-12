@@ -35,6 +35,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import io.swagger.client.models.DetailResponse
+import io.swagger.client.models.LoginEmailFormModel
+import ru.nsu.concertmate.App
 import ru.nsu.concertmate.CodeLoginActivity
 import ru.nsu.concertmate.MainWindowActivity
 import ru.nsu.concertmate.R
@@ -120,6 +123,7 @@ fun LoginScreen(activity: Activity?, isCodeEnter: Boolean) {
             Button(
                 onClick = {
                     if (!isCodeEnter) {
+                        //val res = App.api.emailLogin(LoginEmailFormModel(inputFieldText))
                         val intent = Intent(activity, CodeLoginActivity::class.java)
                         activity?.startActivity(intent)
                     } else {

@@ -10,6 +10,10 @@ landscapistCoil3Android = "2.4.6"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.9.3"
 composeBom = "2024.04.01"
+moshi = "1.15.2"
+moshiAdapters = "1.11.0"
+moshiKotlin = "1.15.2"
+moshiKotlinVersion = "1.11.0"
 uiTextGoogleFonts = "1.7.6"
 googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.1.0"
@@ -35,6 +39,10 @@ landscapist = { module = "com.github.skydoves:landscapist", version.ref = "lands
 landscapist-coil3-android = { module = "com.github.skydoves:landscapist-coil3-android", version.ref = "landscapistCoil3Android" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebaseMessagingKtx" }
+moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
+moshi-adapters = { module = "com.squareup.moshi:moshi-adapters", version.ref = "moshiAdapters" }
+moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshiKotlin" }
+moshi-kotlin-v1110 = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshiKotlinVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
