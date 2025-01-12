@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "320206274480",
+    "project_id": "concert-mate-ba47b",
+    "storage_bucket": "concert-mate-ba47b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320206274480:android:6c650272877b1d9e472075",
+        "android_client_info": {
+          "package_name": "ru.nsu.concertmate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVBbqQn3ESdsCJOn6BRj8f5Xj7VNvK01k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
