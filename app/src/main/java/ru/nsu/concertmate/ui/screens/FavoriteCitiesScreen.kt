@@ -47,7 +47,8 @@ fun FavoriteCitiesScreen(activity: Activity?) {
                 cities,
                 modifier = Modifier
                     .fillMaxHeight(0.9f)
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
+                activity
             )
             BottomBar(
                 onMidIconPressed = {

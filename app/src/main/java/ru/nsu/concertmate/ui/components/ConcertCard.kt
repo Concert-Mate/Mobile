@@ -126,7 +126,7 @@ fun ConcertCard(
                 }
             }
             Text(
-                "От " + concertInfo.price,
+                "От " + concertInfo.price + " ₽",
                 color = Color(0xFF1E1E1E),
                 fontSize = 16.sp,
                 modifier = Modifier

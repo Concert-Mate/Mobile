@@ -2,6 +2,7 @@ package ru.nsu.concertmate.ui.screens
 
 import android.app.Activity
 import android.content.Intent
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -22,12 +23,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -48,6 +51,16 @@ import ru.nsu.concertmate.ui.components.TextFieldView
 import ru.nsu.concertmate.ui.theme.FontMontserrat
 import ru.nsu.concertmate.ui.theme.FontRobotoSlab
 
+private fun isValidEmail(email: String): Boolean {
+    val regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$".toRegex()
+    return regex.matches(email)
+}
+
+private fun isValidFiveDigitNumber(input: String): Boolean {
+    val regex = "^[1-9][0-9]{5}$".toRegex()
+    return regex.matches(input)
+}
+
 @Composable
 fun LoginScreen(email: String, activity: Activity?, isCodeEnter: Boolean) {
     val buttonText = if (isCodeEnter) "Подтвердить" else "Вход"
@@ -57,6 +70,8 @@ fun LoginScreen(email: String, activity: Activity?, isCodeEnter: Boolean) {
     val fieldText = remember { mutableStateOf("") }
     systemUiController.setSystemBarsColor(Color.Green)
     systemUiController.setNavigationBarColor(Color.Yellow)
+
+
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(
             modifier = Modifier
@@ -127,9 +142,20 @@ fun LoginScreen(email: String, activity: Activity?, isCodeEnter: Boolean) {
                     if (!isCodeEnter) {
                         try {
                             //App.api.emailLogin(LoginEmailFormModel(inputFieldText))
+
+                            if (fieldText.value.isEmpty()) {
+                                Toast.makeText(activity, "Почта не может быть пустой", Toast.LENGTH_SHORT).show()
+                                return@Button
+                            }
+                            if (!isValidEmail(fieldText.value)) {
+                                Toast.makeText(activity, "Неверный формат почты", Toast.LENGTH_SHORT).show()
+                                return@Button
+                            }
+
                             val intent = Intent(activity, CodeLoginActivity::class.java)
                             intent.putExtra("email", fieldText.value)
                             activity?.startActivity(intent)
+                            fieldText.value = ""
                         } catch (exception: Exception){
                             if (activity != null) {
                                 ShowErrorDialog(activity, exception)
@@ -145,6 +171,12 @@ fun LoginScreen(email: String, activity: Activity?, isCodeEnter: Boolean) {
                             //val tokens = App.api.loginWithEmailCode(LoginEmailCodeFormModel(email, inputFieldText, token))
                             //Preferences.setToken(App.context!!, tokens.accessToken)
                             //Preferences.setRefreshToken(App.context!!, tokens.refreshToken)
+
+                            if (!isValidFiveDigitNumber(fieldText.value)) {
+                                Toast.makeText(activity, "Код должен быть 6 значным числом", Toast.LENGTH_SHORT).show()
+                                return@Button
+                            }
+
                             val intent = Intent(activity, MainWindowActivity::class.java)
                             activity?.startActivity(intent)
                         } catch (exception: Exception){

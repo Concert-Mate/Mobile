@@ -36,7 +36,7 @@ fun FavoriteConcertsScreen(activity: Activity?) {
                 .fillMaxHeight()
         ) {
             TopBar(
-                text = "Главное меню", activity,
+                text = "Избранное", activity,
                 modifier = Modifier.fillMaxHeight(0.065f)
             )
             ConcertCardColumn(

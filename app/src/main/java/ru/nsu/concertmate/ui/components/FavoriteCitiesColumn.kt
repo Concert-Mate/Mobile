@@ -1,5 +1,7 @@
 package ru.nsu.concertmate.ui.components
 
+import android.app.Activity
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,9 +23,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 
+private fun isValidRussianLettersWithDash(input: String): Boolean {
+    val regex = "^[а-яА-Я-]+$".toRegex()
+    return regex.matches(input)
+}
+
+
 @Composable
-fun FavoriteCitiesColumn(cities: SnapshotStateList<String>, modifier: Modifier = Modifier) {
+fun FavoriteCitiesColumn(cities: SnapshotStateList<String>, modifier: Modifier = Modifier, activity: Activity?) {
     val city = remember { mutableStateOf("") }
+
     Column(
         modifier = modifier
             .background(
@@ -43,7 +52,19 @@ fun FavoriteCitiesColumn(cities: SnapshotStateList<String>, modifier: Modifier =
                 TextFieldViewWithIcon(
                     value = city.value,
                     placeholder = "Введите название города",
-                    onClick = { cities.add(city.value) },
+                    onClick = {
+                                if(city.value.isEmpty()) {
+                                    Toast.makeText(activity, "Название города не может быть пустым", Toast.LENGTH_SHORT).show()
+                                    return@TextFieldViewWithIcon
+                                }
+                                if(!isValidRussianLettersWithDash(city.value)) {
+                                    Toast.makeText(activity, "Название города только на русском", Toast.LENGTH_SHORT).show()
+                                    return@TextFieldViewWithIcon
+                                }
+
+                                cities.add(city.value)
+                                city.value = ""
+                              },
                     keyboardType = KeyboardType.Text,
                     onValueChange = { str -> city.value = str },
                     modifier = DefaultTextViewModifier

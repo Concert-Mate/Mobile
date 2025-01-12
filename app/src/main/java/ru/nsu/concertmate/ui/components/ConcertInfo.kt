@@ -97,7 +97,7 @@ fun ConcertInfo(concertInfo: ConcertInfoDto, modifier: Modifier = Modifier) {
             }
             Spacer(modifier = Modifier.height(10.dp))
             Text(
-                "Минимальная стоимость — ${concertInfo.price}₽",
+                "Минимальная стоимость — ${concertInfo.price} ₽",
                 color = Color(0xFF1E1E1E),
                 fontFamily = FontRubik,
                 fontSize = 16.sp,

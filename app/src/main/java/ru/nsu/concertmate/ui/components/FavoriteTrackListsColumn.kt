@@ -1,5 +1,7 @@
 package ru.nsu.concertmate.ui.components
 
+import android.app.Activity
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,8 +24,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun FavoriteTrackListsColumn(trackLists: SnapshotStateList<String>, modifier: Modifier = Modifier) {
-    val city = remember { mutableStateOf("") }
+fun FavoriteTrackListsColumn(trackLists: SnapshotStateList<String>, modifier: Modifier = Modifier, activity: Activity?) {
+    val trackListLink = remember { mutableStateOf("") }
     Column(
         modifier = modifier
             .background(
@@ -41,11 +43,18 @@ fun FavoriteTrackListsColumn(trackLists: SnapshotStateList<String>, modifier: Mo
         ) {
             item {
                 TextFieldViewWithIcon(
-                    value = city.value,
+                    value = trackListLink.value,
                     placeholder = "Введите ссылку на треклист",
-                    onClick = { trackLists.add(city.value) },
+                    onClick = {
+                        if(trackListLink.value.isEmpty()) {
+                            Toast.makeText(activity, "Ссылка на треклист не может быть пустой", Toast.LENGTH_SHORT).show()
+                            return@TextFieldViewWithIcon
+                        }
+                        trackLists.add(trackListLink.value)
+                        trackListLink.value = ""
+                              },
                     keyboardType = KeyboardType.Text,
-                    onValueChange = { str -> city.value = str },
+                    onValueChange = { str -> trackListLink.value = str },
                     modifier = DefaultTextViewModifier
                         .align(Alignment.CenterHorizontally)
                         .padding(start = 10.dp)

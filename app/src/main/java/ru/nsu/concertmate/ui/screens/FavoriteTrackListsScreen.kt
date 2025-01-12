@@ -45,7 +45,8 @@ fun FavoriteTrackListsScreen(activity: Activity?) {
                 trackLists,
                 modifier = Modifier
                     .fillMaxHeight(0.9f)
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
+                activity
             )
             BottomBar(
                 onMidIconPressed = {
