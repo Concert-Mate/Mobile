@@ -156,6 +156,7 @@ fun LoginScreen(email: String, activity: Activity?, isCodeEnter: Boolean) {
                             intent.putExtra("email", fieldText.value)
                             activity?.startActivity(intent)
                             fieldText.value = ""
+                            Toast.makeText(activity, "Код подтверждения был отправлен на почту", Toast.LENGTH_SHORT).show()
                         } catch (exception: Exception){
                             if (activity != null) {
                                 ShowErrorDialog(activity, exception)
