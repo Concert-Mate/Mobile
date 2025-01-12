@@ -1,5 +1,7 @@
 package ru.nsu.concertmate.ui.screens
 
+import android.app.Activity
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,13 +19,16 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import ru.nsu.concertmate.MainActivity
+import ru.nsu.concertmate.ProfileActivity
 import ru.nsu.concertmate.ui.components.BottomBar
 import ru.nsu.concertmate.ui.components.ConcertInfo
+import ru.nsu.concertmate.ui.components.ConcertInfoColumn
 import ru.nsu.concertmate.ui.components.TopBar
 import ru.nsu.concertmate.ui.components.exampleConcertInfoDto
 
 @Composable
-fun ConcertInfoScreen() {
+fun ConcertInfoScreen(activity: Activity?) {
 
     Scaffold(
         modifier = Modifier.fillMaxSize()
@@ -44,21 +49,26 @@ fun ConcertInfoScreen() {
                 )
         ) {
             TopBar(text = "О концерте",
+                activity = activity,
                 hasLeftIcon = true,
-                onLeftIconPressed = {},
                 modifier = Modifier.fillMaxHeight(0.065f)
             )
-            Column(modifier = Modifier
-                .padding(horizontal = 10.dp)
-                .fillMaxHeight(0.9f)
-            ) {
-                Spacer(modifier = Modifier.height(20.dp))
-                ConcertInfo(
-                    concertInfo = exampleConcertInfoDto,
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
-            BottomBar(modifier = Modifier.fillMaxHeight(1f))
+            ConcertInfoColumn(
+                concertInfo = exampleConcertInfoDto,
+                modifier = Modifier
+                    .fillMaxHeight(0.9f)
+                    .fillMaxWidth()
+            )
+            BottomBar(
+                onMidIconPressed = {
+                    val intent = Intent(activity, MainActivity::class.java)
+                    activity?.startActivity(intent)
+                },
+                onLeftIconPressed = {
+                    val intent = Intent(activity, ProfileActivity::class.java)
+                    activity?.startActivity(intent)
+                },
+                modifier = Modifier.fillMaxHeight(1f))
         }
     }
 }
@@ -66,5 +76,5 @@ fun ConcertInfoScreen() {
 @Preview
 @Composable
 fun ConcertInfoScreenPreview(){
-    ConcertInfoScreen()
+    ConcertInfoScreen(null)
 }

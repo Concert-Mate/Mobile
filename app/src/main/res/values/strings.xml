@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Concert Mate</string>
+    <string name="title_activity_email_login">EmailLoginActivity</string>
+    <string name="title_activity_code_login">CodeLoginActivity</string>
+    <string name="title_activity_main_window">MainWindowActivity</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_favorite_cities">FavoriteCitiesActivity</string>
+    <string name="title_activity_favorite_track_lists">FavoriteTrackListsActivity</string>
 </resources>

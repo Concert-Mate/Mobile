@@ -39,123 +39,130 @@ import ru.nsu.concertmate.R
 import ru.nsu.concertmate.ui.theme.FontRubik
 
 @Composable
-fun ConcertInfo(concertInfo: ConcertInfoDto, modifier: Modifier = Modifier){
+fun ConcertInfo(concertInfo: ConcertInfoDto, modifier: Modifier = Modifier) {
 
-    val isStarred = remember { mutableStateOf(concertInfo.isStarred)}
-        Box(
-            modifier = modifier
-                .clip(shape = RoundedCornerShape(8.dp))
+    val isStarred = remember { mutableStateOf(concertInfo.isStarred) }
+    Box(
+        modifier = modifier
+            .clip(shape = RoundedCornerShape(8.dp))
+            .fillMaxWidth()
+            .background(
+                color = Color(0xFFFFFFFF),
+                shape = RoundedCornerShape(8.dp)
+            )
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(15.dp),
+            modifier = Modifier
                 .fillMaxWidth()
-                .background(
-                    color = Color(0xFFFFFFFF),
-                    shape = RoundedCornerShape(8.dp)
-                )
-        ){
+                .align(Alignment.TopCenter)
+                .padding(start = 10.dp, end = 10.dp, top = 20.dp, bottom = 10.dp)
+        ) {
+            Text(
+                concertInfo.groupName,
+                color = Color(0xFF1E1E1E),
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                fontFamily = FontRubik,
+                modifier = Modifier
+            )
+            Text(
+                concertInfo.title,
+                color = Color(0xFF757575),
+                fontSize = 16.sp,
+                fontFamily = FontRubik,
+                modifier = Modifier
+            )
             Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(15.dp),
+                verticalArrangement = Arrangement.spacedBy(20.dp),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .align(Alignment.TopCenter)
-                    .padding(start = 10.dp, end = 10.dp, top = 20.dp, bottom = 10.dp)
-            ){
-                Text(concertInfo.groupName,
+                    .align(Alignment.Start)
+                    .padding(end = 30.dp)
+            ) {
+                Text(
+                    "${concertInfo.time} в городе ${concertInfo.city} произойдёт гранзиозный концерт исполнителя ${concertInfo.groupName} в ${concertInfo.place}",
                     color = Color(0xFF1E1E1E),
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = FontRubik,
-                    modifier = Modifier
-                )
-                Text(concertInfo.title,
-                    color = Color(0xFF757575),
                     fontSize = 16.sp,
                     fontFamily = FontRubik,
-                    modifier = Modifier
                 )
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(20.dp),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .align(Alignment.Start)
-                        .padding(end = 30.dp)
-                ){
-                    Text("${concertInfo.time} в городе ${concertInfo.city} произойдёт гранзиозный концерт исполнителя ${concertInfo.groupName} в ${concertInfo.place}",
-                            color = Color(0xFF1E1E1E),
-                        fontSize = 16.sp,
-                        fontFamily = FontRubik,
-                    )
-                    if (concertInfo.address != null)
-                    Text("Не знаешь где это? Не проблема! Концерт пройдёт в ${concertInfo.address}",
+                if (concertInfo.address != null)
+                    Text(
+                        "Не знаешь где это? Не проблема! Концерт пройдёт в ${concertInfo.address}",
                         color = Color(0xFF1E1E1E),
                         fontSize = 16.sp,
                         fontFamily = FontRubik,
                     )
-                }
-                Spacer(modifier = Modifier.height(10.dp))
-                Text("Минимальная стоимость — ${concertInfo.price}₽",
-                    color = Color(0xFF1E1E1E),
-                    fontFamily = FontRubik,
-                    fontSize = 16.sp,
-                )
-                Button(
-                    onClick = {
-                        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(concertInfo.buyLink))
-                        browserIntent.setFlags(FLAG_ACTIVITY_NEW_TASK)
-                        App.context?.startActivity(browserIntent)
-                    },
-                    border = BorderStroke(0.dp, Color.Transparent),
-                    colors = ButtonDefaults.outlinedButtonColors(Color.Transparent),
-                    contentPadding = PaddingValues(),
-                    modifier = Modifier
-                        .clip(shape = RoundedCornerShape(8.dp))
-                        .background(
-                            color = Color(0xFFF56456),
-                            shape = RoundedCornerShape(8.dp)
-                        )
-                        .fillMaxWidth(0.9f)
-                ){
-                    Column(
-                        modifier = Modifier
-                    ){
-                        Text("Приобрести билет!",
-                            color = Color(0xFFFFFFFF),
-                            fontFamily = FontRubik,
-                            fontSize = 16.sp,
-                            modifier = Modifier
-                        ) }
-                }
             }
-            IconButton(
-                onClick = { isStarred.value = !isStarred.value },
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                "Минимальная стоимость — ${concertInfo.price}₽",
+                color = Color(0xFF1E1E1E),
+                fontFamily = FontRubik,
+                fontSize = 16.sp,
+            )
+            Button(
+                onClick = {
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(concertInfo.buyLink))
+                    browserIntent.setFlags(FLAG_ACTIVITY_NEW_TASK)
+                    App.context?.startActivity(browserIntent)
+                },
+                border = BorderStroke(0.dp, Color.Transparent),
+                colors = ButtonDefaults.outlinedButtonColors(Color.Transparent),
+                contentPadding = PaddingValues(),
                 modifier = Modifier
-                    .align(Alignment.TopEnd)
-            ){
-                LazyColumn {
-                    item(isStarred) {
-
-                        if (isStarred.value)
-                            Image(
-                                painter = painterResource(id = R.mipmap.star_filled_icon_foreground),
-                                contentDescription = null,
-                                contentScale = ContentScale.Crop,
-                                modifier = Modifier
-                                    .width(36.dp)
-                                    .height(36.dp)
-                            )
-                        else
-                            Image(
-                                painter = painterResource(id = R.mipmap.star_icon_foreground),
-                                contentDescription = null,
-                                contentScale = ContentScale.Crop,
-                                modifier = Modifier
-                                    .width(36.dp)
-                                    .height(36.dp)
-                            )
-                    }
+                    .clip(shape = RoundedCornerShape(8.dp))
+                    .background(
+                        color = Color(0xFFF56456),
+                        shape = RoundedCornerShape(8.dp)
+                    )
+                    .fillMaxWidth(0.9f)
+            ) {
+                Column(
+                    modifier = Modifier
+                ) {
+                    Text(
+                        "Приобрести билет!",
+                        color = Color(0xFFFFFFFF),
+                        fontFamily = FontRubik,
+                        fontSize = 16.sp,
+                        modifier = Modifier
+                    )
                 }
-
             }
         }
+        IconButton(
+            onClick = { isStarred.value = !isStarred.value },
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+        ) {
+            LazyColumn {
+                item(isStarred) {
+
+                    if (isStarred.value)
+                        Image(
+                            painter = painterResource(id = R.mipmap.star_filled_icon_foreground),
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .width(36.dp)
+                                .height(36.dp)
+                        )
+                    else
+                        Image(
+                            painter = painterResource(id = R.mipmap.star_icon_foreground),
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .width(36.dp)
+                                .height(36.dp)
+                        )
+                }
+            }
+
+        }
+    }
 }
 
 @Preview
@@ -163,5 +170,6 @@ fun ConcertInfo(concertInfo: ConcertInfoDto, modifier: Modifier = Modifier){
 private fun ConcertInfoPreview() {
     ConcertInfo(
         exampleConcertInfoDto,
-        modifier = Modifier.fillMaxWidth())
+        modifier = Modifier.fillMaxWidth()
+    )
 }

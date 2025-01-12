@@ -28,18 +28,20 @@ import androidx.compose.ui.unit.sp
 import ru.nsu.concertmate.R
 import ru.nsu.concertmate.ui.theme.FontRubik
 
-data class ConcertInfoDto(val groupName: String,
-                          val title: String,
-                          val time: String,
-                          val city: String,
-                          val price: Int,
-                          val isStarred: Boolean,
-                          val place: String,
-                          val address: String? = null,
-                          val buyLink:String?
-                          )
+data class ConcertInfoDto(
+    val groupName: String,
+    val title: String,
+    val time: String,
+    val city: String,
+    val price: Int,
+    val isStarred: Boolean,
+    val place: String,
+    val address: String? = null,
+    val buyLink: String?
+)
 
-val exampleConcertInfoDto = ConcertInfoDto("Король и Шут",
+val exampleConcertInfoDto = ConcertInfoDto(
+    "Король и Шут",
     "Цифровая сказка",
     "16 января, 20:00",
     "Новосибирск",
@@ -51,10 +53,12 @@ val exampleConcertInfoDto = ConcertInfoDto("Король и Шут",
 
 
 @Composable
-fun ConcertCard(concertInfo: ConcertInfoDto,
-                modifier: Modifier = Modifier){
+fun ConcertCard(
+    concertInfo: ConcertInfoDto,
+    modifier: Modifier = Modifier
+) {
 
-    val isStarred = remember { mutableStateOf(concertInfo.isStarred)}
+    val isStarred = remember { mutableStateOf(concertInfo.isStarred) }
 
     Box(
         modifier = Modifier
@@ -62,19 +66,20 @@ fun ConcertCard(concertInfo: ConcertInfoDto,
                 color = Color(0xFFFFFFFF),
                 shape = RoundedCornerShape(8.dp)
             )
-    ){
-        Box{
+    ) {
+        Box {
             Column(
                 modifier = modifier
                     .padding(all = 10.dp)
                     .align(AbsoluteAlignment.TopLeft)
-            ){
+            ) {
                 Column(
                     modifier = Modifier
 
-                        .padding(top = 3.dp,bottom = 32.dp,start = 2.dp,end = 2.dp)
-                ){
-                    Text(concertInfo.groupName,
+                        .padding(top = 3.dp, bottom = 32.dp, start = 2.dp, end = 2.dp)
+                ) {
+                    Text(
+                        concertInfo.groupName,
                         color = Color(0xFF000000),
                         fontSize = 20.sp,
                         fontWeight = FontWeight.ExtraBold,
@@ -82,21 +87,24 @@ fun ConcertCard(concertInfo: ConcertInfoDto,
                         modifier = Modifier
                             .padding(bottom = 14.dp)
                     )
-                    Text(concertInfo.title,
+                    Text(
+                        concertInfo.title,
                         color = Color(0xFF757575),
                         fontSize = 16.sp,
                         fontFamily = FontRubik,
                         modifier = Modifier
                             .padding(bottom = 17.dp)
                     )
-                    Text(concertInfo.time,
+                    Text(
+                        concertInfo.time,
                         color = Color(0xFF757575),
                         fontSize = 14.sp,
                         fontFamily = FontRubik,
                         modifier = Modifier
                             .padding(bottom = 2.dp)
                     )
-                    Text(concertInfo.city,
+                    Text(
+                        concertInfo.city,
                         color = Color(0xFF1E1E1E),
                         fontSize = 16.sp,
                         fontFamily = FontRubik,
@@ -104,7 +112,8 @@ fun ConcertCard(concertInfo: ConcertInfoDto,
                     )
                 }
             }
-            Text("От " + concertInfo.price,
+            Text(
+                "От " + concertInfo.price,
                 color = Color(0xFF1E1E1E),
                 fontSize = 16.sp,
                 modifier = Modifier
@@ -119,7 +128,7 @@ fun ConcertCard(concertInfo: ConcertInfoDto,
                 .width(36.dp)
                 .height(36.dp)
                 .align(Alignment.TopEnd)
-        ){
+        ) {
             LazyColumn {
                 item(isStarred) {
 
@@ -150,8 +159,8 @@ fun ConcertCard(concertInfo: ConcertInfoDto,
 
 @Preview
 @Composable
-fun ConcertCardPreview()
-{
-    ConcertCard( exampleConcertInfoDto
-        ,modifier = Modifier.fillMaxWidth())
+fun ConcertCardPreview() {
+    ConcertCard(
+        exampleConcertInfoDto, modifier = Modifier.fillMaxWidth()
+    )
 }

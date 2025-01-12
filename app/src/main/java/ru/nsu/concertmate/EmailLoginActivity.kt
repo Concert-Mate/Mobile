@@ -4,16 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import ru.nsu.concertmate.ui.screens.ConcertInfoScreen
 import ru.nsu.concertmate.ui.screens.LoginScreen
 
-class MainActivity : ComponentActivity() {
+class EmailLoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         enableEdgeToEdge()
         setContent {
-            LoginScreen(activity = this, isCodeEnter = false)
+            LoginScreen(this, isCodeEnter = false)
         }
     }
 }

@@ -1,5 +1,7 @@
 package ru.nsu.concertmate.ui.screens
 
+import android.app.Activity
+import android.content.Intent
 import androidx.compose.runtime.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -15,6 +17,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import ru.nsu.concertmate.CodeLoginActivity
+import ru.nsu.concertmate.MainWindowActivity
 import ru.nsu.concertmate.R
 import ru.nsu.concertmate.ui.components.DefaultTextViewModifier
 import ru.nsu.concertmate.ui.components.TextFieldView
@@ -22,7 +26,7 @@ import ru.nsu.concertmate.ui.theme.FontMontserrat
 import ru.nsu.concertmate.ui.theme.FontRobotoSlab
 
 @Composable
-fun LoginScreen(isCodeEnter: Boolean) {
+fun LoginScreen(activity: Activity?, isCodeEnter: Boolean) {
     val buttonText = if (isCodeEnter) "Подтвердить" else "Вход"
     val inputFieldText = if (isCodeEnter) "Введите код подтверждения" else "Введите E-mail"
     val inputKeyboardType = if (isCodeEnter) KeyboardType.Number else KeyboardType.Email
@@ -96,7 +100,17 @@ fun LoginScreen(isCodeEnter: Boolean) {
             )
             Spacer(modifier = Modifier.height(25.dp))
             Button(
-                onClick = { println("Pressed!") },
+                onClick = {
+                    if (!isCodeEnter){
+                        val intent = Intent(activity, CodeLoginActivity::class.java)
+                        activity?.startActivity(intent)
+                    }
+                    else{
+                        val intent = Intent(activity, MainWindowActivity::class.java)
+                        activity?.startActivity(intent)
+                    }
+                    activity?.finish()
+                },
                 colors = ButtonDefaults.outlinedButtonColors(containerColor = Color.Transparent),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
@@ -118,8 +132,9 @@ fun LoginScreen(isCodeEnter: Boolean) {
     }
 }
 
+
 @Preview
 @Composable
 fun LoginScreenPreview(){
-    LoginScreen(true)
+    LoginScreen(null, true)
 }
