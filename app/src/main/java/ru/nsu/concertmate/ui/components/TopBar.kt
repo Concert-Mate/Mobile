@@ -1,5 +1,6 @@
 package ru.nsu.concertmate.ui.components
 
+import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
@@ -24,13 +25,14 @@ import ru.nsu.concertmate.R
 import ru.nsu.concertmate.ui.theme.FontRobotoSlab
 
 @Composable
-fun TopBar(text: String,
-           modifier: Modifier = Modifier,
-           hasLeftIcon: Boolean = false,
-           onLeftIconPressed: () -> Unit = {},
-           hasRightIcon: Boolean = false,
-           onRightIconPressed: () -> Unit = {})
-{
+fun TopBar(
+    text: String,
+    activity: Activity?,
+    modifier: Modifier = Modifier,
+    hasLeftIcon: Boolean = false,
+    hasRightIcon: Boolean = false,
+    onRightIconPressed: () -> Unit = {}
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
@@ -40,15 +42,17 @@ fun TopBar(text: String,
                 color = Color(0xFFFFFFFF),
             )
             .padding(start = 16.dp, end = 16.dp)
-    ){
+    ) {
         IconButton(
-            onClick = onLeftIconPressed,
+            onClick = {
+                activity?.finish()
+            },
             enabled = hasLeftIcon,
             modifier = Modifier
                 .width(14.dp)
                 .height(14.dp)
                 .alpha(if (hasLeftIcon) 1f else 0f)
-        ){
+        ) {
             Image(
                 painter = painterResource(id = R.mipmap.back_icon_foreground),
                 contentDescription = null,
@@ -56,7 +60,8 @@ fun TopBar(text: String,
             )
         }
         Spacer(modifier = Modifier.width(16.dp))
-        Text(text,
+        Text(
+            text,
             color = Color(0xFF1E1E1E),
             fontSize = 24.sp,
             fontFamily = FontRobotoSlab,
@@ -71,7 +76,7 @@ fun TopBar(text: String,
                 .width(26.dp)
                 .height(26.dp)
                 .alpha(if (hasRightIcon) 1f else 0f)
-        ){
+        ) {
             Image(
                 painter = painterResource(id = R.mipmap.refresh_icon_foreground),
                 contentDescription = null,
@@ -84,6 +89,6 @@ fun TopBar(text: String,
 
 @Preview
 @Composable
-fun TopBarPreview(){
-    TopBar("Главное меню")
+fun TopBarPreview() {
+    TopBar("Главное меню", null)
 }

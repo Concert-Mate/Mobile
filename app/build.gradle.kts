@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -61,6 +62,8 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.landscapist)
     implementation(libs.landscapist.coil3.android)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.messaging.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -69,5 +72,15 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.androidx.ui.text.google.fonts)
+    runtimeOnly(libs.moshi.kotlin)
+    runtimeOnly(libs.moshi)
+    implementation(libs.moshi.kotlin.v1110)
+    implementation(libs.moshi.adapters)
+
+    // Java language implementation
+    implementation(libs.androidx.fragment)
+    // Kotlin
+    implementation(libs.androidx.fragment.ktx)
+
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
 }

@@ -53,12 +53,14 @@ fun TextFieldView(
     BasicTextField(
         singleLine = true,
         decorationBox = {
-            Box(Modifier
-                .fillMaxWidth()
-                .zIndex(-1f)
+            Box(
+                Modifier
+                    .fillMaxWidth()
+                    .zIndex(-1f)
             )
             {
-                Text(text = value.ifEmpty { placeholder },
+                Text(
+                    text = value.ifEmpty { placeholder },
                     color = Color.Gray,
                     fontSize = textStyle.fontSize,
                     modifier = Modifier.align(Alignment.Center)
@@ -87,15 +89,18 @@ fun TextFieldViewWithIcon(
     BasicTextField(
         singleLine = true,
         decorationBox = {
-            Box(Modifier
-                .fillMaxWidth()
-                .zIndex(-1f)
+            Box(
+                Modifier
+                    .fillMaxWidth()
+                    .zIndex(-1f)
             )
             {
-                Text(text = value.ifEmpty { placeholder },
+                Text(
+                    text = value.ifEmpty { placeholder },
                     color = Color.Gray,
                     fontSize = textStyle.fontSize,
-                    modifier = Modifier.align(Alignment.CenterStart)
+                    modifier = Modifier
+                        .align(Alignment.CenterStart)
                         .padding(start = 10.dp)
                 )
                 IconButton(
@@ -105,7 +110,7 @@ fun TextFieldViewWithIcon(
                         .height(30.dp)
                         .align(Alignment.CenterEnd)
                         .padding(end = 10.dp)
-                ){
+                ) {
                     Image(
                         painter = painterResource(id = R.mipmap.check_icon_foreground),
                         contentDescription = null,
@@ -125,7 +130,8 @@ fun TextFieldViewWithIcon(
 @Preview()
 @Composable
 fun TextFieldPreview() {
-    TextFieldView("text",
+    TextFieldView(
+        "text",
         onValueChange = { str -> println(str) },
         modifier = DefaultTextViewModifier,
         textStyle = DefaultTextViewTextStyle,
@@ -135,7 +141,8 @@ fun TextFieldPreview() {
 @Preview()
 @Composable
 fun TextFieldWishIconPreview() {
-    TextFieldViewWithIcon("text",
+    TextFieldViewWithIcon(
+        "text",
         onValueChange = { str -> println(str) },
         onClick = {},
         modifier = DefaultTextViewModifier,

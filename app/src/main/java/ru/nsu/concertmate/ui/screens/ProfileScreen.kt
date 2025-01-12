@@ -1,5 +1,7 @@
 package ru.nsu.concertmate.ui.screens
 
+import android.app.Activity
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,15 +27,20 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ru.nsu.concertmate.FavoriteConcertsActivity
+import ru.nsu.concertmate.MainWindowActivity
 import ru.nsu.concertmate.ui.components.BottomBar
+import ru.nsu.concertmate.ui.components.ProfileColumn
 import ru.nsu.concertmate.ui.components.TopBar
 import ru.nsu.concertmate.ui.theme.FontRubik
 
 
 @Composable
-fun ButtonWithText(text: String,
-                   onClick: () -> Unit,
-                   modifier: Modifier = Modifier){
+fun ButtonWithText(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.outlinedButtonColors(containerColor = Color.Transparent),
@@ -64,13 +71,13 @@ fun ButtonWithText(text: String,
 
 
 @Composable
-fun ProfileScreen(){
+fun ProfileScreen(activity: Activity?) {
 
     Scaffold(
         modifier = Modifier.fillMaxSize()
     )
     { innerPadding ->
-        Column (
+        Column(
             verticalArrangement = Arrangement.Top,
             modifier = Modifier
                 .padding(innerPadding)
@@ -84,27 +91,34 @@ fun ProfileScreen(){
                     )
                 )
         ) {
-            TopBar(text = "Профиль",
+            TopBar(
+                text = "Профиль",
+                activity = activity,
                 modifier = Modifier.fillMaxHeight(0.065f)
             )
-            Column(
-                verticalArrangement = Arrangement.spacedBy(10.dp),
+            ProfileColumn(
+                activity = activity,
                 modifier = Modifier
                     .fillMaxHeight(0.9f)
-                    .padding(start = 6.dp, end = 6.dp, top = 16.dp)
-            ) {
-                ButtonWithText(text = "Избранные города", onClick = {})
-                ButtonWithText(text = "Избранные треклисты", onClick = {})
-                ButtonWithText(text = "Часто задаваемые вопросы", onClick = {})
-                ButtonWithText(text = "Выйти из аккаунта", onClick = {})
-            }
-            BottomBar(modifier = Modifier.fillMaxHeight(1f))
+                    .fillMaxWidth()
+            )
+            BottomBar(
+                onMidIconPressed = {
+                    val intent = Intent(activity, MainWindowActivity::class.java)
+                    activity?.startActivity(intent)
+                },
+                onRightIconPressed = {
+                    val intent = Intent(activity, FavoriteConcertsActivity::class.java)
+                    activity?.startActivity(intent)
+                },
+                modifier = Modifier.fillMaxHeight(1f)
+            )
         }
     }
 }
 
 @Preview
 @Composable
-fun ProfileScreenPreview(){
-    ProfileScreen()
+fun ProfileScreenPreview() {
+    ProfileScreen(null)
 }
